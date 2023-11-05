@@ -16,14 +16,14 @@ code {
 
 /* for chat */
 .app{
-  /* background: linear-gradient(#2a00b7, #42006c);  */
+  background: linear-gradient(135deg, #2C3E50, #4A6491);
   display: flex;
-  color: #302727;
+  color: #E0E0E0; 
 }
 
 .side-bar{
   
-  background-color: #eaeaea;
+  background-color: #1e1d1d;
   height: 100vh;
   width: 244px;
   display: flex;
@@ -32,12 +32,15 @@ code {
 }
 
 button{
-  
-  border: solid 1px rgba(79, 76, 76, 0.5);
-  background-color: transparent;
+  border: solid 1px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(135deg, #8E44AD, #3498DB);
   border-radius: 5px;
   padding: 5px;
   margin: 10px;
+  color: white;
+}
+button:hover {
+    background: linear-gradient(135deg, #3498DB, #8E44AD);
 }
 
 .history{
@@ -92,6 +95,22 @@ nav{
 
 }
 
+textarea {
+    resize: none;
+    overflow: hidden;
+    min-height: 40px;
+    width: calc(100% - 50px);
+    border: none;
+    font-size: 20px;
+    background-color: rgba(255,255,255,0.5);
+    padding: 12px 15px;
+    border-radius: 5px;
+}
+
+textarea:focus {
+    outline: none;
+}
+
 input{
   width: 100%;
   border: none;
@@ -106,10 +125,12 @@ input:focus{
 }
 
 #submit{
-  position: absolute;
-  bottom: 15px;
-  right: 0;
-  cursor: pointer;
+   position: absolute;
+    bottom: 10px; /* Adjust this value as per your design */
+    right: 10px; /* Adjust this value to position the arrow icon */
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 .feed{
