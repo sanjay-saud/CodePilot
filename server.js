@@ -2,10 +2,8 @@ const PORT = 8000
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const mongoose = require('mongoose')
-const ChatHistory = require('../CodePilot/src/models/ChatHistory')
-const ChatHistory = require('../CodePilot/src/models/ChatHistory')
-const ChatHistory = require('../CodePilot/src/models/ChatHistory')
+
+
 
 app.use(express.json())
 app.use(cors())
@@ -14,12 +12,12 @@ require('dotenv').config();
 
 const API_KEY = process.env.OPENAI_API_KEY
 
-mongoose.connect('mongodb+srv://gorock397:091560397@test.vriqyqc.mongodb.net/?retryWrites=true&w=majority', {
-     useNewUrlParser: true, 
-     useUnifiedTopology: true
+// mongoose.connect('mongodb+srv://gorock397:091560397@test.vriqyqc.mongodb.net/?retryWrites=true&w=majority', {
+//      useNewUrlParser: true, 
+//      useUnifiedTopology: true
 
-})
-mongoose.connection.on('error', console.error.bind(console,'MongoDB connection error:'));
+// })
+// mongoose.connection.on('error', console.error.bind(console,'MongoDB connection error:'));
 
 
 
@@ -59,36 +57,5 @@ app.post('/completions', async (req, res) => {
 }
 )
 
-app.post('/save-message', async (req,res) =>{
-    const {userId, sender, content} = req.body;
-
-    try{
-        let chatHistory = await ChatHistory.findOne({userId:userId});
-        if(!chatHistory){
-            chatHistory = new ChatHistory({userId, messages:[]});
-        }
-        chatHistory.messages.push({sender, content});
-        chatHistory.lastUpdated = new Date();
-        await chatHistory.save();
-
-        res.status(200).send({message:'Message saved'});
-
-    }catch (error){
-        console.error(error);
-        res.status(500).send('Error saving message');
-    }
-})
-
-app.get('/chat-history/:userId', async(req, res) =>{
-    const userId = req.params.userId;
-
-     try {
-        const chatHistory = await ChatHistory.findOne({ userId: userId });
-        res.status(200).json(chatHistory);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error retrieving chat history');
-    }
-})
 
 app.listen(PORT ,()=> console.log('Your server is running on PORT ' + PORT))

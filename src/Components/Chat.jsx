@@ -1,7 +1,21 @@
 import '../index.css';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+// import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
+// import htmlbars from 'react-syntax-highlighter/dist/esm/languages/hljs/htmlbars';
+// import css from 'react-syntax-highlighter/dist/esm/languages/hljs/css';
+// import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python';
+
+
+// SyntaxHighlighter.registerLanguage('python', python);
+// SyntaxHighlighter.registerLanguage('html', htmlbars);
+// SyntaxHighlighter.registerLanguage('css', css);
+// SyntaxHighlighter.registerLanguage('javascript', js);
 
 import { useState, useEffect } from 'react';
 import {useKindeAuth} from '@kinde-oss/kinde-auth-react';
+
 
 const Chat = () => {
 
@@ -43,6 +57,7 @@ const Chat = () => {
     }
   }
 
+
   useEffect(() => {
     console.log(currentTitle, value, message)
     if(!currentTitle && value && message){
@@ -72,6 +87,7 @@ const Chat = () => {
   const currentChat = previousChats.filter(previousChats => previousChats.title === currentTitle)
   const uniqueTitles = Array.from(new Set(previousChats.map(previousChats => previousChats.title)))
  
+
   return (
     <><div>
       <div className='app'>
@@ -97,7 +113,10 @@ const Chat = () => {
           <ul className='feed'>
             {currentChat?.map((chatMessage, index) => <li key={index}>
               <p className='role'>{chatMessage.role}</p>
-              <p>{chatMessage.content}</p>
+              <p><SyntaxHighlighter customStyle={{padding:"25px"}} language={chatMessage.language} style={atomOneDark}>
+                  {chatMessage.content}
+                </SyntaxHighlighter>
+              </p>
             </li>)}
           </ul>
           <div className='botton-section'>
